@@ -1,0 +1,80 @@
+// Digital Ammeter
+// EEE Mini Project - C++
+
+// Calculate and display current measurements
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main()
+{
+    int n;
+    double current;
+    double totalCurrent = 0.0;
+    double averageCurrent;
+
+    cout << "====================================\n";
+    cout << "          DIGITAL AMMETER\n";
+    cout << "====================================\n";
+
+    cout << "Enter number of readings: ";
+    cin >> n;
+
+    if (n <= 0)
+    {
+        cout << "Invalid number of readings.\n";
+        return 0;
+    }
+
+    // Read current values
+    for (int i = 1; i <= n; i++)
+    {
+        cout << "Enter current reading "
+             << i << " (A): ";
+
+        cin >> current;
+
+        if (current < 0)
+        {
+            cout << "Current cannot be negative.\n";
+            i--;
+            continue;
+        }
+
+        totalCurrent += current;
+    }
+
+    // Calculate average current
+    averageCurrent = totalCurrent / n;
+
+    cout << fixed << setprecision(2);
+
+    cout << "\n====================================\n";
+    cout << "         AMMETER RESULT\n";
+    cout << "====================================\n";
+
+    cout << "Total Current   : "
+         << totalCurrent << " A\n";
+
+    cout << "Average Current : "
+         << averageCurrent << " A\n";
+
+    // Current status
+    if (averageCurrent < 1.0)
+    {
+        cout << "Status          : LOW CURRENT\n";
+    }
+    else if (averageCurrent <= 10.0)
+    {
+        cout << "Status          : NORMAL CURRENT\n";
+    }
+    else
+    {
+        cout << "Status          : HIGH CURRENT\n";
+    }
+
+    cout << "====================================\n";
+
+    return 0;
+}
